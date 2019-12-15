@@ -6,7 +6,7 @@ galaxy_info:
   description: Configure remi repository
   license: license (BSD, MIT)
   platforms:
-    - name: Centos
+    - name: CentOS
       versions:
         - 6
         - 7
