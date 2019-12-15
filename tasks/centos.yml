@@ -1,0 +1,21 @@
+---
+
+# add repo
+- name: Install remi repo
+  yum:
+    name: "{{ remiCentosUrl }}"
+    state: "{{ remiCentosState }}"
+
+# add the remi rpm key
+- name: add rpm key
+  rpm_key:
+    key: "{{ remiCentosRpmKey }}"
+    state: "{{ remiCentosState }}"
+
+# enable/disable the correct repo's
+- name: configure repo's
+  command: "yum-config-manager --{{ item.state | default('disable') }} {{ item.name }}"
+  register: yumConfigStatus
+  changed_when: yumConfigStatus.rc == 2
+  with_items:
+    - "{{ remiCentosRepoList }}"

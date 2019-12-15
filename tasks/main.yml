@@ -1,0 +1,11 @@
+---
+
+- name: Install required tools
+  yum:
+    name: "yum-utils"
+    state: "installed"
+
+# include centos task when centos 6,7 or 8
+- name: Centos
+  include_tasks: centos.yml
+  when: ansible_distribution == "CentOS"
