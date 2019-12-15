@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: remi repo
+  role_name: remi_repo
   author: Gino Jansen
   description: Configure remi repository
   license: license (BSD, MIT)
