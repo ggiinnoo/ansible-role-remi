@@ -1,6 +1,13 @@
 ---
 
 # List of all the repos
+remiCentosRepoListRHEL8:
+  - name: remi-modular
+  - name: remi
+  - name: remi-safe
+    state: enable
+
+# List of all the repos
 remiCentosRepoList:
   - name: remi-glpi91
   - name: remi-glpi92
@@ -19,5 +26,5 @@ remiCentosRepoList:
 
 # Centos specific vars
 remiCentosUrl: "https://rpms.remirepo.net/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm"
-remiCentosRpmKey: "https://rpms.remirepo.net/RPM-GPG-KEY-remi"
+remiCentosRpmKey: "https://rpms.remirepo.net/RPM-GPG-KEY-remi2018"
 remiCentosState: "present"
