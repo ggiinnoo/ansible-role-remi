@@ -1,15 +1,15 @@
 ---
 
-# add repo
-- name: Install remi repo
-  yum:
-    name: "{{ remiCentosUrl }}"
-    state: "{{ remiCentosState }}"
-
 # add the remi rpm key
 - name: add rpm key
   rpm_key:
     key: "{{ remiCentosRpmKey }}"
+    state: "{{ remiCentosState }}"
+
+# add repo
+- name: Install remi repo
+  yum:
+    name: "{{ remiCentosUrl }}"
     state: "{{ remiCentosState }}"
 
 # enable/disable the correct repo's
@@ -19,3 +19,16 @@
   changed_when: yumConfigStatus.rc == 2
   with_items:
     - "{{ remiCentosRepoList }}"
+  when:
+    - ansible_distribution_version == "6.0"
+    - ansible_distribution_version == "7.0"
+
+# enable/disable the correct repo's
+- name: configure repo's
+  command: "yum-config-manager --{{ item.state | default('disable') }} {{ item.name }}"
+  register: yumConfigStatus
+  changed_when: yumConfigStatus.rc == 2
+  with_items:
+    - "{{ remiCentosRepoListRHEL8 }}"
+  when:
+    - ansible_distribution_version == "8.0"
